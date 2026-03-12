@@ -1,0 +1,25 @@
+version: 1.0
+runners:
+  high:
+    config-id: 3
+images:
+    jdk:
+        image: maven:3.8.5-openjdk-17
+        auth:
+            username: catalystauto
+            password: << env.DOCKER_PASS >> 
+jobs:
+  catalyst-slate-deploy:
+    steps:
+      - curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
+      - microdnf install -y nodejs git perl
+      - npm install -g zcatalyst-cli@beta
+      - git clone https://github.com/Catalyst-Auto/Slate-CLI.git
+      - cd Slate-CLI/slate-app
+      - catalyst deploy slate -m "Deploy app using CLI" --org << event.ORGID >> -p << event.PROJECTID >> --token << env.CATALYST_TOKEN >> --verbose
+stages:
+  - name: deploy
+    runner: high
+    image: jdk
+    jobs:
+      - catalyst-slate-deploy
