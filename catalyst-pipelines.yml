@@ -16,6 +16,7 @@ jobs:
       - npm install -g zcatalyst-cli@beta
       - git clone https://github.com/Catalyst-Auto/Slate-CLI.git
       - cd Slate-CLI/slate-app
+      - find . -type f
       - catalyst deploy slate -m "Deploy app using CLI" --org << event.ORGID >> -p << event.PROJECTID >> --token << env.CATALYST_TOKEN >> --verbose
 stages:
   - name: deploy
