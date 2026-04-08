@@ -30,9 +30,9 @@ export default function Home() {
               <div key={key} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                 <div className="flex flex-col gap-2">
                   <span className="text-sm font-semibold text-blue-600">{key}</span>
-                  <code className="text-sm bg-gray-50 p-3 rounded border border-gray-200 break-all text-gray-800">
+                  <h5 className="text-sm bg-gray-50 p-3 rounded border border-gray-200 break-all text-gray-800">
                     {value || 'Not set'}
-                  </code>
+                  </h5>
                 </div>
               </div>
             ))}
